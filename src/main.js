@@ -4,12 +4,9 @@ function start() {
     const taskInput = document.querySelector('.task input');
     const checkButton = document.querySelector('.task img');
     const taskList = document.querySelector('.list');
+    const sortButton = document.querySelector('.sortButton');
 
-    let arrTasks = [];
     function addingTask() {
-        arrTasks.push(taskInput.value);
-        console.log(arrTasks);
-        
         const newTask = document.createElement('div');
         newTask.classList.add('task');
         taskList.append(newTask);
@@ -19,18 +16,28 @@ function start() {
         newCheckButton.src = 'src/images/checkButton.svg';
         newTask.append (newCheckButton);
 
+        newCheckButton.addEventListener('mouseover', (event) => {
+            event.target.src = 'src/images/checkedButton.svg';
+        })
+        newCheckButton.addEventListener('mouseout', (event) => {
+            event.target.src = 'src/images/checkButton.svg';
+        })
         newCheckButton.addEventListener('click', (event) => {
+            
+    })
+}
+    checkButton.addEventListener('mouseover', (event) => {
         event.target.src = 'src/images/checkedButton.svg';
-   });
-    }
-    addButton.addEventListener('click', (addingTask))
-               
-
+    })
+    checkButton.addEventListener('mouseout', (event) => {
+        event.target.src = 'src/images/checkButton.svg';
+    })
     checkButton.addEventListener('click', (event) => {
-         event.target.src = 'src/images/checkedButton.svg';
 
-        }
     });
+
+    addButton.addEventListener('click', (addingTask))
+
 
     
 
