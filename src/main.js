@@ -10,27 +10,32 @@ function start() {
     let num = 0;
 
     const newTask = document.createElement('div');
-        newTask.classList.add('task');
-        taskList.append(newTask);
-        const newInput = document.createElement('input');
-        newTask.append(newInput)
-        const newCheckButton = document.createElement('img');
-        newCheckButton.src = 'src/images/checkButton.svg';
-        newTask.append (newCheckButton);
-        newCheckButton.addEventListener('mouseover', (event) => {
-            event.target.src = 'src/images/checkedButton.svg';
-        })
-        newCheckButton.addEventListener('mouseout', (event) => {
-            event.target.src = 'src/images/checkButton.svg';
-        })
-        newCheckButton.addEventListener('click', () => {  
-            if (num > 0) { 
-                newTask.remove()
-                num--;
-            } else {
-                newInput.value = ""
-            }
-        })
+    newTask.classList.add('task');
+    taskList.append(newTask);
+    const newInput = document.createElement('input');
+    newTask.append(newInput)
+    const newCheckButton = document.createElement('img');
+    newCheckButton.src = 'src/images/checkButton.svg';
+    newTask.append (newCheckButton);
+
+    // newTask.addEventListener('dragstart', dragAndDrop); ///////////
+    // newTask.addEventListener('dragend', dragAndDrop); /////////////
+    // newTask.addEventListener('dragenter', dragAndDrop); /////////////
+
+    newCheckButton.addEventListener('mouseover', (event) => {
+        event.target.src = 'src/images/checkedButton.svg';
+    })
+    newCheckButton.addEventListener('mouseout', (event) => {
+        event.target.src = 'src/images/checkButton.svg';
+    })
+    newCheckButton.addEventListener('click', () => {  
+        if (num > 0) { 
+            newTask.remove()
+            num--;
+        } else {
+            newInput.value = ""
+        }
+    })
 
     function addingTask() {
         num++;
@@ -44,6 +49,10 @@ function start() {
         newTask.append (newCheckButton);
 
         newInput.focus();
+
+        newTask.addEventListener('dragstart', dragAndDrop); ///////////
+        newTask.addEventListener('dragend', dragAndDrop); /////////////
+        newTask.addEventListener('dragenter', dragAndDrop); /////////////
 
         newCheckButton.addEventListener('mouseover', (event) => {
             event.target.src = 'src/images/checkedButton.svg';
@@ -194,7 +203,43 @@ function start() {
             sortButton.classList.add('sortButton1');
         }
     })
-    sortButton.addEventListener('click', sorting)
+    sortButton.addEventListener('click', sorting);
+
+    ////////////////////////Drag and Drop///////////////////////////////
+
+    newTask.addEventListener('dragstart', dragAndDrop); ///////////
+    newTask.addEventListener('dragend', dragAndDrop); /////////////
+    newTask.addEventListener('dragenter', dragAndDrop); /////////////
+
+    let activeTask = null;
+    function dragAndDrop(event) {
+        switch (event.type) {
+            case 'dragstart':
+                activeTask = event.currentTarget;
+                event.currentTarget.classList.add('select');
+                break;
+            case 'dragend':
+                event.currentTarget.classList.remove('select');
+                break;
+            case 'dragenter':
+                if (event.currentTarget.classList.contains('task')) {
+                    changeTasks(activeTask, event.currentTarget); //меняем местами выбранную карточку и текущий элемент
+                }
+                break;
+        }
+    }
+    function changeTasks(active, other) {
+        const arr = [...active.parentElement.children];
+        const activeIndex = arr.findIndex(element => element === active);
+        const otherIndex = arr.findIndex(element => element === other);
+        
+        if(activeIndex < otherIndex) {
+            active.parentElement.insertBefore(other, active);
+        } else if (activeIndex > otherIndex) {
+            active.parentElement.insertBefore(active, other);
+        }
+    }
+
 }
 
 window.addEventListener('load', start)
