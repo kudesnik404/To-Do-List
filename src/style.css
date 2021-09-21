@@ -54,7 +54,25 @@ body, html {
     margin-left: 281px;
     margin-right: 30px;
     margin-top: 16px;
+    width: 25px;
+    height: 15px;
 }
+
+    .sortButton1 {
+        background: url('./images/sort1.svg') no-repeat center center / contain;
+    }
+
+    .sortButton2 {
+        background: url('./images/sort2.svg') no-repeat center center / contain;
+    }
+
+    .sortButton3 {
+        background: url('./images/sort3.svg') no-repeat center center / contain;
+    }
+
+    .sortButton4 {
+        background: url('./images/sort4.svg') no-repeat center center / contain;
+    }
 
     .sortButton:hover {
         cursor: pointer;
@@ -136,3 +154,5 @@ body, html {
         line-height: 16px;
         cursor: pointer;
     }
+
+
