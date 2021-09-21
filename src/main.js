@@ -70,6 +70,10 @@ function start() {
 
 
     function sorting() {
+        if ((sortButton.classList.contains('sortButton1')) || (sortButton.classList.contains('sortButton4'))) {
+        sortButton.classList.remove('sortButton1');
+        sortButton.classList.remove('sortButton4');
+        sortButton.classList.add('sortButton3');
         let arr = [];
         const everyTask = document.querySelectorAll('.task');
         let num = -1;
@@ -119,7 +123,59 @@ function start() {
                 }
             })
         }
-    }
+    } else if (sortButton.classList == 'sortButton sortButton3') {
+        sortButton.classList.add('sortButton4');
+        sortButton.classList.remove('sortButton3');
+                    let arr = [];
+                    const everyTask = document.querySelectorAll('.task');
+                    let num = -1;
+                    everyTask.forEach((element) => {
+                        arr.push(element);
+                        arr.sort(function(a, b){
+                            let taskA = a.firstElementChild.value.toLowerCase(); 
+                            let taskB = b.firstElementChild.value.toLowerCase();
+                            if (taskA > taskB) {
+                                return -1;
+                            } else if (taskA > taskB) {
+                                return 1;
+                            } else {
+                                return 0;
+                            }
+                        })
+                        element.remove()
+                    })
+                    for (let i = 0; i < arr.length; i++) {
+                        num++
+                        const newTask = document.createElement('div');
+                        newTask.classList.add('task');
+                        taskList.append(newTask);
+                        const newInput = document.createElement('input');
+                        newInput.value = arr[i].firstElementChild.value;
+                        newTask.append(newInput)
+                        const newCheckButton = document.createElement('img');
+                        newCheckButton.src = 'src/images/checkButton.svg';
+                        newTask.append (newCheckButton);
+            
+                        if ((arr[i].firstElementChild.value == "") && (i >= 0)) {
+                            newTask.remove();
+                            num--;
+                        }
+                        newCheckButton.addEventListener('mouseover', (event) => {
+                            event.target.src = 'src/images/checkedButton.svg';
+                        })
+                        newCheckButton.addEventListener('mouseout', (event) => {
+                            event.target.src = 'src/images/checkButton.svg';
+                        })
+                        newCheckButton.addEventListener('click', () => {  
+                            if (num > 0) { 
+                                newTask.remove()
+                                num--;
+                            } else {
+                                newInput.value = ""
+                            }
+                        })
+                    } 
+    }}
     sortButton.addEventListener('click', sorting)
 }
 
