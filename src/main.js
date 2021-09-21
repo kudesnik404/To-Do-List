@@ -104,7 +104,7 @@ function start() {
             newCheckButton.src = 'src/images/checkButton.svg';
             newTask.append (newCheckButton);
 
-            if ((arr[i].firstElementChild.value == "") && (i >= 0)) {
+            if ((arr[i].firstElementChild.value == "") && (arr.length > 1)) {
                 newTask.remove();
                 num--;
             }
@@ -123,6 +123,7 @@ function start() {
                 }
             })
         }
+
     } else if (sortButton.classList == 'sortButton sortButton3') {
         sortButton.classList.add('sortButton4');
         sortButton.classList.remove('sortButton3');
@@ -156,7 +157,7 @@ function start() {
                         newCheckButton.src = 'src/images/checkButton.svg';
                         newTask.append (newCheckButton);
             
-                        if ((arr[i].firstElementChild.value == "") && (i >= 0)) {
+                        if ((arr[i].firstElementChild.value == "") && (arr.length > 1)) {
                             newTask.remove();
                             num--;
                         }
