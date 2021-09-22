@@ -18,7 +18,7 @@ body, html {
 
 .card {
     width: 336px;
-    height: auto;
+    height: min-content;
     border: 1px solid #C4C4C4;
     border-radius: 10px;
     display: flex;
