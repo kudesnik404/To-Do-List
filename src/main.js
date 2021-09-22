@@ -7,31 +7,9 @@ function start() {
     const sortButton = document.querySelector('.sortButton');
     const firstTask = document.querySelector('.task');
 
-    let num = 0;
+    let num = -1;
 
-    const newTask = document.createElement('div');
-    newTask.classList.add('task');
-    taskList.append(newTask);
-    const newInput = document.createElement('input');
-    newTask.append(newInput)
-    const newCheckButton = document.createElement('img');
-    newCheckButton.src = 'src/images/checkButton.svg';
-    newTask.append (newCheckButton);
-
-    newCheckButton.addEventListener('mouseover', (event) => {
-        event.target.src = 'src/images/checkedButton.svg';
-    })
-    newCheckButton.addEventListener('mouseout', (event) => {
-        event.target.src = 'src/images/checkButton.svg';
-    })
-    newCheckButton.addEventListener('click', () => {  
-        if (num > 0) { 
-            newTask.remove()
-            num--;
-        } else {
-            newInput.value = ""
-        }
-    })
+    addingTask();
 
     function addingTask() {
         num++;
@@ -171,8 +149,7 @@ function start() {
                         newCheckButton.addEventListener('mouseout', (event) => {
                             event.target.src = 'src/images/checkButton.svg';
                         })
-                        newCheckButton.addEventListener('click', () => {  
-                            console.log(num)
+                        newCheckButton.addEventListener('click', () => {
                             if (num > 0) { 
                                 newTask.remove()
                                 num--;
@@ -201,13 +178,6 @@ function start() {
         }
     })
     sortButton.addEventListener('click', sorting);
-
-    ////////////////////////Drag and Drop///////////////////////////////
-    
-    newTask.draggable = true;
-    newTask.addEventListener('dragstart', dragAndDrop);
-    newTask.addEventListener('dragend', dragAndDrop);
-    newTask.addEventListener('dragenter', dragAndDrop);
 
     let activeTask = null;
     function dragAndDrop(event) {
