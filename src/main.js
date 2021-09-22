@@ -6,7 +6,6 @@ function start() {
     let num = -1;
 
     addingTask();
-
     function addingTask() {
         num++;
         const newTask = document.createElement('div');
@@ -95,11 +94,17 @@ function start() {
                 newCheckButton.src = 'src/images/checkButton.svg';
                 newTask.append (newCheckButton);
                 num++
+                
+                newTask.draggable = true
+                newTask.addEventListener('dragstart', dragAndDrop);
+                newTask.addEventListener('dragend', dragAndDrop);
+                newTask.addEventListener('dragenter', dragAndDrop);
 
                 if ((arr[i].firstElementChild.value == "") && (arr.length > 1)) {
                     newTask.remove();
                     num--;
                 }
+
                 newCheckButton.addEventListener('mouseover', (event) => {
                     event.target.src = 'src/images/checkedButton.svg';
                 })
@@ -159,6 +164,11 @@ function start() {
                         newTask.append (newCheckButton);
                         num++
 
+                        newTask.draggable = true;
+                        newTask.addEventListener('dragstart', dragAndDrop);
+                        newTask.addEventListener('dragend', dragAndDrop);
+                        newTask.addEventListener('dragenter', dragAndDrop);
+
                         if ((arr[i].firstElementChild.value == "") && (arr.length > 1)) {
                             newTask.remove();
                             num--;
@@ -178,7 +188,8 @@ function start() {
                             }
                         })
                     } 
-    }}
+        }
+    }
     sortButton.addEventListener('mouseover', () => {
         if (sortButton.classList.contains('sortButton1')) {
             sortButton.classList.remove('sortButton1');
@@ -228,5 +239,4 @@ function start() {
         }
     }
 }
-
 window.addEventListener('load', start)
