@@ -18,10 +18,6 @@ function start() {
     newCheckButton.src = 'src/images/checkButton.svg';
     newTask.append (newCheckButton);
 
-    // newTask.addEventListener('dragstart', dragAndDrop); ///////////
-    // newTask.addEventListener('dragend', dragAndDrop); /////////////
-    // newTask.addEventListener('dragenter', dragAndDrop); /////////////
-
     newCheckButton.addEventListener('mouseover', (event) => {
         event.target.src = 'src/images/checkedButton.svg';
     })
@@ -50,9 +46,10 @@ function start() {
 
         newInput.focus();
 
-        newTask.addEventListener('dragstart', dragAndDrop); ///////////
-        newTask.addEventListener('dragend', dragAndDrop); /////////////
-        newTask.addEventListener('dragenter', dragAndDrop); /////////////
+        newTask.draggable = true;
+        newTask.addEventListener('dragstart', dragAndDrop);
+        newTask.addEventListener('dragend', dragAndDrop);
+        newTask.addEventListener('dragenter', dragAndDrop);
 
         newCheckButton.addEventListener('mouseover', (event) => {
             event.target.src = 'src/images/checkedButton.svg';
@@ -206,10 +203,11 @@ function start() {
     sortButton.addEventListener('click', sorting);
 
     ////////////////////////Drag and Drop///////////////////////////////
-
-    newTask.addEventListener('dragstart', dragAndDrop); ///////////
-    newTask.addEventListener('dragend', dragAndDrop); /////////////
-    newTask.addEventListener('dragenter', dragAndDrop); /////////////
+    
+    newTask.draggable = true;
+    newTask.addEventListener('dragstart', dragAndDrop);
+    newTask.addEventListener('dragend', dragAndDrop);
+    newTask.addEventListener('dragenter', dragAndDrop);
 
     let activeTask = null;
     function dragAndDrop(event) {
@@ -223,7 +221,7 @@ function start() {
                 break;
             case 'dragenter':
                 if (event.currentTarget.classList.contains('task')) {
-                    changeTasks(activeTask, event.currentTarget); //меняем местами выбранную карточку и текущий элемент
+                    changeTasks(activeTask, event.currentTarget);
                 }
                 break;
         }
