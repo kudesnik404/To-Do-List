@@ -1,11 +1,7 @@
 function start() {
-    const mainCard = document.querySelector('.card');
     const addButton = document.querySelector('.button');
-    const taskInput = document.querySelector('.task input');
-    const checkButton = document.querySelector('.task img');
     const taskList = document.querySelector('.list');
     const sortButton = document.querySelector('.sortButton');
-    const firstTask = document.querySelector('.task');
 
     let num = -1;
 
@@ -201,7 +197,7 @@ function start() {
         const activeIndex = arr.findIndex(element => element === active);
         const otherIndex = arr.findIndex(element => element === other);
         
-        if(activeIndex < otherIndex) {
+        if (activeIndex < otherIndex) {
             active.parentElement.insertBefore(other, active);
         } else if (activeIndex > otherIndex) {
             active.parentElement.insertBefore(active, other);
