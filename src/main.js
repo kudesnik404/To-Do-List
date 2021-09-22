@@ -1,15 +1,12 @@
 function start() {
-    const mainCard = document.querySelector('.card');
     const addButton = document.querySelector('.button');
-    const taskInput = document.querySelector('.task input');
-    const checkButton = document.querySelector('.task img');
     const taskList = document.querySelector('.list');
     const sortButton = document.querySelector('.sortButton');
-    const firstTask = document.querySelector('.task');
 
     let num = -1;
 
     addingTask();
+    // init();
 
     function addingTask() {
         num++;
@@ -64,12 +61,22 @@ function start() {
             arr.sort(function(a, b){
                 let taskA = a.firstElementChild.value.toLowerCase(); 
                 let taskB = b.firstElementChild.value.toLowerCase();
-                if (taskA < taskB) {
-                    return -1;
-                } else if (taskA > taskB) {
-                    return 1;
+                if (isNaN(taskA) && isNaN(taskB)) {
+                    if (taskA < taskB) {
+                        return -1;
+                    } else if (taskA > taskB) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
                 } else {
-                    return 0;
+                    if (+taskA < +taskB) {
+                        return -1;
+                    } else if (+taskA > +taskB) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
                 }
             })
             element.remove()
@@ -116,12 +123,22 @@ function start() {
                         arr.sort(function(a, b){
                             let taskA = a.firstElementChild.value.toLowerCase(); 
                             let taskB = b.firstElementChild.value.toLowerCase();
-                            if (taskA > taskB) {
-                                return -1;
-                            } else if (taskA > taskB) {
-                                return 1;
+                            if (isNaN(taskA) && isNaN(taskB)) {
+                                if (taskA > taskB) {
+                                    return -1;
+                                } else if (taskA < taskB) {
+                                    return 1;
+                                } else {
+                                    return 0;
+                                }
                             } else {
-                                return 0;
+                                if (+taskA > +taskB) {
+                                    return -1;
+                                } else if (+taskA < +taskB) {
+                                    return 1;
+                                } else {
+                                    return 0;
+                                }
                             }
                         })
                         element.remove()
@@ -201,13 +218,37 @@ function start() {
         const activeIndex = arr.findIndex(element => element === active);
         const otherIndex = arr.findIndex(element => element === other);
         
-        if(activeIndex < otherIndex) {
+        if (activeIndex < otherIndex) {
             active.parentElement.insertBefore(other, active);
         } else if (activeIndex > otherIndex) {
             active.parentElement.insertBefore(active, other);
         }
     }
 
+    // function touchHandler(event) {
+    //     let touch = event.changedTouches[0];
+    
+    //     let simulatedEvent = document.createEvent("DragEvent");
+    //         simulatedEvent.initMouseEvent({
+    //         touchstart: "dragstart",
+    //         touchmove: "dragstart",
+    //         touchend: "dragend",
+    //         touchcancel: "dragend"
+    //     }[event.type], true, true, window, 1,
+    //         touch.screenX, touch.screenY,
+    //         touch.clientX, touch.clientY, false,
+    //         false, false, false, 0, null);
+    
+    //     touch.target.dispatchEvent(simulatedEvent);
+    //     // event.preventDefault();
+    // }
+    
+    // function init() {
+    //     document.addEventListener("touchstart", touchHandler, true);
+    //     document.addEventListener("touchmove", touchHandler, true);
+    //     document.addEventListener("touchend", touchHandler, true);
+    //     document.addEventListener("touchcancel", touchHandler, true);
+    // }
 }
 
 window.addEventListener('load', start)
