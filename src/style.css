@@ -23,8 +23,8 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 232px;
-    margin-bottom: 232px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .line {
