@@ -1,11 +1,7 @@
 function start() {
-    const mainCard = document.querySelector('.card');
     const addButton = document.querySelector('.button');
-    const taskInput = document.querySelector('.task input');
-    const checkButton = document.querySelector('.task img');
     const taskList = document.querySelector('.list');
     const sortButton = document.querySelector('.sortButton');
-    const firstTask = document.querySelector('.task');
 
     let num = -1;
 
@@ -68,12 +64,22 @@ function start() {
             arr.sort(function(a, b){
                 let taskA = a.firstElementChild.value.toLowerCase(); 
                 let taskB = b.firstElementChild.value.toLowerCase();
-                if (taskA < taskB) {
-                    return -1;
-                } else if (taskA > taskB) {
-                    return 1;
+                if (isNaN(taskA) && isNaN(taskB)) {
+                    if (taskA < taskB) {
+                        return -1;
+                    } else if (taskA > taskB) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
                 } else {
-                    return 0;
+                    if (+taskA < +taskB) {
+                        return -1;
+                    } else if (+taskA > +taskB) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
                 }
             })
             element.remove()
@@ -120,12 +126,22 @@ function start() {
                         arr.sort(function(a, b){
                             let taskA = a.firstElementChild.value.toLowerCase(); 
                             let taskB = b.firstElementChild.value.toLowerCase();
-                            if (taskA > taskB) {
-                                return -1;
-                            } else if (taskA > taskB) {
-                                return 1;
+                            if (isNaN(taskA) && isNaN(taskB)) {
+                                if (taskA > taskB) {
+                                    return -1;
+                                } else if (taskA < taskB) {
+                                    return 1;
+                                } else {
+                                    return 0;
+                                }
                             } else {
-                                return 0;
+                                if (+taskA > +taskB) {
+                                    return -1;
+                                } else if (+taskA < +taskB) {
+                                    return 1;
+                                } else {
+                                    return 0;
+                                }
                             }
                         })
                         element.remove()
@@ -205,13 +221,12 @@ function start() {
         const activeIndex = arr.findIndex(element => element === active);
         const otherIndex = arr.findIndex(element => element === other);
         
-        if(activeIndex < otherIndex) {
+        if (activeIndex < otherIndex) {
             active.parentElement.insertBefore(other, active);
         } else if (activeIndex > otherIndex) {
             active.parentElement.insertBefore(active, other);
         }
     }
-
 }
 
 window.addEventListener('load', start)
