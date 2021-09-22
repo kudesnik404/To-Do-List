@@ -60,7 +60,11 @@ function start() {
         let arr = [];
         const everyTask = document.querySelectorAll('.task');
         everyTask.forEach((element) => {
-            arr.push(element);
+            if (isNaN(element.querySelector('input').value)) {
+                arr.push(element);
+            } else {
+                arr.unshift(element);
+            }
             arr.sort(function(a, b){
                 let taskA = a.firstElementChild.value.toLowerCase(); 
                 let taskB = b.firstElementChild.value.toLowerCase();
