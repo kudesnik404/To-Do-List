@@ -107,8 +107,8 @@ body, html {
         font-size: 14px;
         line-height: 16px;
         border: none;
-        background-color: white;
         padding-left: 27px;
+        background: transparent;
     }
 
     .task img {
